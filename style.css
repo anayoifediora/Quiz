@@ -47,10 +47,15 @@ h1 {
     padding: 0.2rem;
     border-radius: 5px;
     cursor: pointer;
-    background-color: blue;
+    background-color: rgb(62, 62, 152);
     color: white;
-    font-size: 1.2rem;
-    width:20%;
+    font-size: 1.25rem;
+    width:15%;
+}
+.answer:hover {
+    background-color:white;
+    color: rgb(62, 62, 152);
+    border: 3px solid rgb(62, 62, 152);
 }
 .questions {
     margin: 1rem;
