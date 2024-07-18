@@ -4,6 +4,8 @@ let questionEl = document.querySelector('.questions');
 let answerForm = document.querySelector('.answers-form');
 let answerBtns = document.querySelectorAll('.answer');
 let questionSection = document.querySelector('.hidden');
+let scoreDisplay = document.querySelector('.score-display');
+let scoreEl = document.querySelector('#score');
 
 let timeInterval;
 let timeLeft = 75;
@@ -44,7 +46,8 @@ let quizQuestions = [ {
 const setTime = () => {
         timeInterval = setInterval(() => {
         timeLeft--;
-        timerEl.textContent = `${timeLeft} seconds left`;
+        timerEl.textContent = `${timeLeft} seconds`;
+        timerEl.setAttribute('style', 'color: rgb(180, 59, 59)');
         
         if (timeLeft === 0) {
             clearInterval(timeInterval);
@@ -91,11 +94,18 @@ answerBtns.forEach((btn) => {
         if (qstnIndex > 4 || timeLeft === 0) {
             questionSection.setAttribute('style', 'display: none;')
             clearInterval(timeInterval);
-            console.log(score)
+            displayScore()
+
         } else {
         renderNextQuestion();
         qstnIndex++;
         }
-        console.log(score);
     })
+
 });
+
+const displayScore = () => {
+    scoreDisplay.setAttribute('style', 'display: block;')
+    scoreEl.textContent = score;
+}
+// displayScore()
