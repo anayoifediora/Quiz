@@ -106,3 +106,8 @@ h1 {
     background-color: rgb(62, 62, 152);
     color:white;
 }
+#response {
+    font-size: 1.7rem;
+    font-weight: bold;
+    margin: 1rem;
+}

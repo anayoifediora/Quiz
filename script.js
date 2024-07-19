@@ -6,6 +6,9 @@ let answerBtns = document.querySelectorAll('.answer');
 let questionSection = document.querySelector('.hidden');
 let scoreDisplay = document.querySelector('.score-display');
 let scoreEl = document.querySelector('#score');
+let submitForm = document.querySelector('.submit-form');
+let initialsInput = document.querySelector('.name');
+let response = document.querySelector('#response');
 
 let timeInterval;
 let timeLeft = 75;
@@ -76,6 +79,15 @@ const renderNextQuestion = () => {
 
     }
 }
+const displayScore = () => {
+    scoreDisplay.setAttribute('style', 'display: block;');
+    if (score < 0) {
+        scoreEl.textContent = 0;
+    } else {
+    scoreEl.textContent = score;
+    timerEl.textContent = ' ';
+    }
+}
 
 startBtn.addEventListener('click', () => {
     setTime();
@@ -87,14 +99,18 @@ answerBtns.forEach((btn) => {
         let answer = e.target.getAttribute('data-answer')
         if (e.target.innerHTML === answer) {
             score++;
+            response.textContent = 'Correct!!! ✅';
+            response.setAttribute('style', 'color: green;')
         } else {
             score--;
             timeLeft-=10;
+            response.textContent = 'Wrong 😢';
+            response.setAttribute('style', 'color: red;')
         }
         if (qstnIndex > 4 || timeLeft === 0) {
             questionSection.setAttribute('style', 'display: none;')
             clearInterval(timeInterval);
-            displayScore()
+            displayScore();
 
         } else {
         renderNextQuestion();
@@ -104,8 +120,10 @@ answerBtns.forEach((btn) => {
 
 });
 
-const displayScore = () => {
-    scoreDisplay.setAttribute('style', 'display: block;')
-    scoreEl.textContent = score;
-}
-// displayScore()
+submitForm.addEventListener('submit', () => {
+    let grade = {
+        initials: initialsInput.value.trim(),
+        testScore: (score > 0) ? score : 0
+    };
+    localStorage.setItem('grade', JSON.stringify(grade));
+})
